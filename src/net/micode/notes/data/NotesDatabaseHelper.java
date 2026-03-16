@@ -14,6 +14,9 @@
  * limitations under the License.
  */
 
+
+//SQLite数据库管理类，创建和维护note（笔记/文件夹基础信息）、data（笔记具体内容）两个表
+
 package net.micode.notes.data;
 
 import android.content.ContentValues;

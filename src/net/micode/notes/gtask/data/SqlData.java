@@ -14,6 +14,11 @@
  * limitations under the License.
  */
 
+
+//进一步封装NotesProvider的接口，简化对数据库的操作
+//提供了对json的封装和解析操作，用来处理同步内容
+//这其中，json充当了信封，往来于GTask和本地笔记
+
 package net.micode.notes.gtask.data;
 
 import android.content.ContentResolver;

@@ -14,6 +14,9 @@
  * limitations under the License.
  */
 
+
+//抽象基类，规定了子类应有的内容和必须实现的功能
+
 package net.micode.notes.gtask.data;
 
 import android.database.Cursor;

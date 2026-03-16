@@ -14,6 +14,9 @@
  * limitations under the License.
  */
 
+
+//同步动作执行失败异常
+
 package net.micode.notes.gtask.exception;
 
 public class ActionFailureException extends RuntimeException {
@@ -21,13 +24,13 @@ public class ActionFailureException extends RuntimeException {
 
     public ActionFailureException() {
         super();
-    }
+    }  //无参构造，只抛出异常
 
     public ActionFailureException(String paramString) {
         super(paramString);
-    }
+    } //抛出异常并说明原因
 
     public ActionFailureException(String paramString, Throwable paramThrowable) {
         super(paramString, paramThrowable);
-    }
+    }  //说明原因并说明异常具体位置，例如json解析失败
 }

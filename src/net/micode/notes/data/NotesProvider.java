@@ -14,6 +14,9 @@
  * limitations under the License.
  */
 
+
+//封装了SQLite的增删改查操作，为app的其他组件提供访问数据库的标准接口
+
 package net.micode.notes.data;
 
 

@@ -14,6 +14,10 @@
  * limitations under the License.
  */
 
+
+//MetaData类，处理GTask同步的元数据
+//负责存储、解析本地笔记与远程GTask的关联gid（1对1），存储形式是json
+
 package net.micode.notes.gtask.data;
 
 import android.database.Cursor;

@@ -14,6 +14,9 @@
  * limitations under the License.
  */
 
+
+//联系人查询工具类，根据传入的电话号码key，查询联系人姓名value，并做了缓存优化
+
 package net.micode.notes.data;
 
 import android.content.Context;
@@ -38,26 +41,26 @@ public class Contact {
 
     public static String getContact(Context context, String phoneNumber) {
         if(sContactCache == null) {
-            sContactCache = new HashMap<String, String>();
+            sContactCache = new HashMap<String, String>();//初始化缓存map
         }
 
         if(sContactCache.containsKey(phoneNumber)) {
-            return sContactCache.get(phoneNumber);
+            return sContactCache.get(phoneNumber);//缓存查到
         }
 
-        String selection = CALLER_ID_SELECTION.replace("+",
+        String selection = CALLER_ID_SELECTION.replace("+",//缓存未查到，生成查询条件
                 PhoneNumberUtils.toCallerIDMinMatch(phoneNumber));
-        Cursor cursor = context.getContentResolver().query(
+        Cursor cursor = context.getContentResolver().query( //实际查询
                 Data.CONTENT_URI,
                 new String [] { Phone.DISPLAY_NAME },
                 selection,
                 new String[] { phoneNumber },
-                null);
+                null);//无需排序
 
-        if (cursor != null && cursor.moveToFirst()) {
+        if (cursor != null && cursor.moveToFirst()) { //有查询结果
             try {
                 String name = cursor.getString(0);
-                sContactCache.put(phoneNumber, name);
+                sContactCache.put(phoneNumber, name); //存入缓存
                 return name;
             } catch (IndexOutOfBoundsException e) {
                 Log.e(TAG, " Cursor get string error " + e.toString());
@@ -65,7 +68,7 @@ public class Contact {
             } finally {
                 cursor.close();
             }
-        } else {
+        } else { //没有查询结果
             Log.d(TAG, "No contact matched with number:" + phoneNumber);
             return null;
         }

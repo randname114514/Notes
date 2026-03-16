@@ -14,6 +14,9 @@
  * limitations under the License.
  */
 
+
+//核心常量定义类，常量字典
+
 package net.micode.notes.data;
 
 import android.net.Uri;

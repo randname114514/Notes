@@ -14,6 +14,10 @@
  * limitations under the License.
  */
 
+
+//同task
+//tasklist转化的json负责笔记文件结构的同步
+
 package net.micode.notes.gtask.data;
 
 import android.database.Cursor;

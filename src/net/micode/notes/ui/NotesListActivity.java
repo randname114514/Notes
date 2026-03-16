@@ -319,29 +319,34 @@ public class NotesListActivity extends Activity implements OnClickListener, OnIt
                 return true;
             }
 
-            switch (item.getItemId()) {
-                case R.id.delete:
-                    AlertDialog.Builder builder = new AlertDialog.Builder(NotesListActivity.this);
-                    builder.setTitle(getString(R.string.alert_title_delete));
-                    builder.setIcon(android.R.drawable.ic_dialog_alert);
-                    builder.setMessage(getString(R.string.alert_message_delete_notes,
-                                             mNotesListAdapter.getSelectedCount()));
-                    builder.setPositiveButton(android.R.string.ok,
-                                             new DialogInterface.OnClickListener() {
-                                                 public void onClick(DialogInterface dialog,
-                                                         int which) {
-                                                     batchDelete();
-                                                 }
-                                             });
-                    builder.setNegativeButton(android.R.string.cancel, null);
-                    builder.show();
-                    break;
-                case R.id.move:
-                    startQueryDestinationFolders();
-                    break;
-                default:
-                    return false;
+            // 先提取itemId，简化后续判断
+            int itemId = item.getItemId();
+
+            if (itemId == R.id.delete) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(NotesListActivity.this);
+                builder.setTitle(getString(R.string.alert_title_delete));
+                builder.setIcon(android.R.drawable.ic_dialog_alert);
+                builder.setMessage(getString(R.string.alert_message_delete_notes,
+                        mNotesListAdapter.getSelectedCount()));
+                builder.setPositiveButton(android.R.string.ok,
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,
+                                                int which) {
+                                batchDelete();
+                            }
+                        });
+                builder.setNegativeButton(android.R.string.cancel, null);
+                builder.show();
+            } else if (itemId == R.id.move) {
+                startQueryDestinationFolders();
+            } else {
+                // 对应原default分支：直接返回false
+                return false;
             }
+
+// 非default分支执行完后，继续后续逻辑（如果有）
+// 注意：原代码中switch结束后没有额外逻辑，这里保持和原代码一致的返回逻辑
+
             return true;
         }
     }
@@ -558,13 +563,14 @@ public class NotesListActivity extends Activity implements OnClickListener, OnIt
     }
 
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.btn_new_note:
-                createNewNote();
-                break;
-            default:
-                break;
+        // 提取View的ID，简化后续判断
+        int viewId = v.getId();
+
+        // 替换原case R.id.btn_new_note
+        if (viewId == R.id.btn_new_note) {
+            createNewNote();
         }
+        // 原default分支无业务逻辑，无需额外处理（else分支可省略）
     }
 
     private void showSoftInput() {
@@ -780,41 +786,43 @@ public class NotesListActivity extends Activity implements OnClickListener, OnIt
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menu_new_folder: {
-                showCreateOrModifyFolderDialog(true);
-                break;
-            }
-            case R.id.menu_export_text: {
-                exportNoteToText();
-                break;
-            }
-            case R.id.menu_sync: {
-                if (isSyncMode()) {
-                    if (TextUtils.equals(item.getTitle(), getString(R.string.menu_sync))) {
-                        GTaskSyncService.startSync(this);
-                    } else {
-                        GTaskSyncService.cancelSync(this);
-                    }
-                } else {
-                    startPreferenceActivity();
-                }
-                break;
-            }
-            case R.id.menu_setting: {
-                startPreferenceActivity();
-                break;
-            }
-            case R.id.menu_new_note: {
-                createNewNote();
-                break;
-            }
-            case R.id.menu_search:
-                onSearchRequested();
-                break;
-            default:
-                break;
+        // 提取MenuItem的ID，简化后续判断（避免重复调用item.getItemId()）
+        int menuItemId = item.getItemId();
+
+        // 替换原case R.id.menu_new_folder
+        if (menuItemId == R.id.menu_new_folder) {
+            showCreateOrModifyFolderDialog(true);
         }
+        // 替换原case R.id.menu_export_text
+        else if (menuItemId == R.id.menu_export_text) {
+            exportNoteToText();
+        }
+        // 替换原case R.id.menu_sync
+        else if (menuItemId == R.id.menu_sync) {
+            if (isSyncMode()) {
+                if (TextUtils.equals(item.getTitle(), getString(R.string.menu_sync))) {
+                    GTaskSyncService.startSync(this);
+                } else {
+                    GTaskSyncService.cancelSync(this);
+                }
+            } else {
+                startPreferenceActivity();
+            }
+        }
+        // 替换原case R.id.menu_setting
+        else if (menuItemId == R.id.menu_setting) {
+            startPreferenceActivity();
+        }
+        // 替换原case R.id.menu_new_note
+        else if (menuItemId == R.id.menu_new_note) {
+            createNewNote();
+        }
+        // 替换原case R.id.menu_search
+        else if (menuItemId == R.id.menu_search) {
+            onSearchRequested();
+        }
+        // 原default分支无逻辑，无需额外处理
+
         return true;
     }
 

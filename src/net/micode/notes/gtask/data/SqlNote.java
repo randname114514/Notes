@@ -14,6 +14,13 @@
  * limitations under the License.
  */
 
+
+//同data
+//node和data是一对多的关系
+//新建node时，与它关联的data不检查版本号
+//更新node时，与它关联的data按照node的版本号进行检查
+//版本号作为锁使用，避免覆盖
+
 package net.micode.notes.gtask.data;
 
 import android.appwidget.AppWidgetManager;

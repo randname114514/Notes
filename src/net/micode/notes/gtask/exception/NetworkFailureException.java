@@ -14,6 +14,9 @@
  * limitations under the License.
  */
 
+
+//网络失败异常
+
 package net.micode.notes.gtask.exception;
 
 public class NetworkFailureException extends Exception {

@@ -14,6 +14,11 @@
  * limitations under the License.
  */
 
+
+//负责转换json并填充信息
+//本地使用的json与GTask使用的json结构不同，Task负责转换并根据上下文填充信息，例如操作类型
+//Task转换的json负责修改笔记内容，实现笔记内容的同步
+
 package net.micode.notes.gtask.data;
 
 import android.database.Cursor;
