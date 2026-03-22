@@ -15,6 +15,10 @@
  * limitations under the License.
  */
 
+//异步执行Gtask同步任务
+//把耗时的同步任务放到后台线程执行，同时在主线程更新执行进度
+//执行完成后返回结果
+
 package net.micode.notes.gtask.remote;
 
 import android.app.Notification;

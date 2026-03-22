@@ -14,23 +14,17 @@
  * limitations under the License.
  */
 
+package net.micode.notes.ui;
 
-//网络失败异常
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
 
-package net.micode.notes.gtask.exception;
-
-public class NetworkFailureException extends Exception {
-    private static final long serialVersionUID = 2107610287180234136L;
-
-    public NetworkFailureException() {
-        super();
-    }
-
-    public NetworkFailureException(String paramString) {
-        super(paramString);
-    }
-
-    public NetworkFailureException(String paramString, Throwable paramThrowable) {
-        super(paramString, paramThrowable);
+public class AlarmReceiver extends BroadcastReceiver {
+    @Override
+    public void onReceive(Context context, Intent intent) {
+        intent.setClass(context, AlarmAlertActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(intent);
     }
 }
