@@ -115,7 +115,7 @@ public class GTaskClient {
     public boolean login(Activity activity) {
         // we suppose that the cookie would expire after 5 minutes
         // then we need to re-login
-        final long interval = 1000 * 60 * 5;
+        final long interval = (long)1000 * 60 * 5;
         if (mLastLoginTime + interval < System.currentTimeMillis()) {
             mLoggedin = false;
         }

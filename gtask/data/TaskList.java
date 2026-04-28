@@ -206,9 +206,11 @@ public class TaskList extends Node {
                 }
                 if (c.getLong(SqlNote.SYNC_ID_COLUMN) == getLastModified()) {
                     // local modification only
+                    Log.e(TAG, "local modification only");
                     return SYNC_ACTION_UPDATE_REMOTE;
                 } else {
                     // for folder conflicts, just apply local modification
+                    Log.e(TAG, "for folder conflicts, just apply local modification");
                     return SYNC_ACTION_UPDATE_REMOTE;
                 }
             }

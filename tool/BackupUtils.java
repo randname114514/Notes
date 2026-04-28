@@ -332,7 +332,11 @@ public class BackupUtils {
                 filedir.mkdir();
             }
             if (!file.exists()) {
-                file.createNewFile();
+               if(!file.createNewFile())
+               {
+                   Log.e(TAG, "dont know,dont care");
+               }
+
             }
             return file;
         } catch (SecurityException e) {

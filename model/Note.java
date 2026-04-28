@@ -125,12 +125,11 @@ public class Note {
         }
         mNoteDiffValues.clear();
 
-        if (mNoteData.isLocalModified()
-                && (mNoteData.pushIntoContentResolver(context, noteId) == null)) {
-            return false;
-        }
-
-        return true;
+        // 修改部分：将 if-else 结构简化为直接返回布尔表达式
+        // 原逻辑：如果有本地修改 且 推送失败(为null)，则返回 false；否则返回 true
+        // 新逻辑：返回 (没有本地修改) 或者 (推送成功不为null)
+        return !mNoteData.isLocalModified()
+                || mNoteData.pushIntoContentResolver(context, noteId) != null;
     }
 
     private class NoteData {
